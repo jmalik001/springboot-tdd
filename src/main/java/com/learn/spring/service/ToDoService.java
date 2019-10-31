@@ -20,4 +20,8 @@ public class ToDoService {
     public List<ToDo> findAll() {
         return toDoRepository.findAll(Sort.by(Sort.Order.asc("text")));
     }
+
+    public ToDo save(ToDo toDo) {
+        return toDoRepository.save(toDo);
+    }
 }

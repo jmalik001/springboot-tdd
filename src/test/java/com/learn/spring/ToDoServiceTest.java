@@ -3,6 +3,7 @@ package com.learn.spring;
 import com.learn.spring.entity.ToDo;
 import com.learn.spring.repository.ToDoRepository;
 import com.learn.spring.service.ToDoService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,4 +33,19 @@ public class ToDoServiceTest {
         Assertions.assertEquals(todoSample.getText(), toDo.getText());
         Assertions.assertEquals(todoSample.isCompleted(), toDo.isCompleted());
     }
+
+    @DisplayName("Save ToDO when data passed correctly")
+    @Test
+    void testSaveToDo() throws Exception {
+        ToDoService toDoService = new ToDoService(toDoRepository);
+        ToDo toDo = new ToDo("Eat almond in morning", true);
+        toDoService.save(toDo);
+        Assertions.assertEquals(1.0, toDoRepository.count());
+
+    }
+    @AfterEach
+    void tearDown(){
+        toDoRepository.deleteAll();
+    }
+
 }
